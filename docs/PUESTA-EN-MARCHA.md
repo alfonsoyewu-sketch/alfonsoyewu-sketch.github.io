@@ -85,7 +85,7 @@ Luego descomenta el `iframe` de [pro.astro](../src/pages/pro.astro) y sustituye 
 
 ## 8. Revisar «Sobre mí»
 
-Lee [sobre-mi.astro](../src/pages/sobre-mi.astro): está escrito a partir de tu CV. Decide qué
-correo quieres publicar (hoy figura alfonsoyewu@gmail.com y el CV usa alfonsoobreja@gmail.com).
-Si quieres contar algo más personal, como por qué te importa la accesibilidad, es tu decisión:
+Lee [sobre-mi.astro](../src/pages/sobre-mi.astro): está escrito a partir de tu CV. El correo
+público es el de la cuenta del proyecto (`email` en `src/config.ts`); cámbialo a
+`contacto@` de tu dominio cuando lo tengas. Si quieres contar algo más personal, como por qué te importa la accesibilidad, es tu decisión:
 no lo he incluido.
