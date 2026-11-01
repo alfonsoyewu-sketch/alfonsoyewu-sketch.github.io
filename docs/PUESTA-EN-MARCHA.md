@@ -1,55 +1,40 @@
 # Puesta en marcha: lo que necesita tus cuentas
 
-Todo lo técnico está hecho. Estos pasos requieren cuentas, pagos o decisiones tuyas. En orden,
-calcula unas 2 horas en total.
+Todo lo técnico está hecho. Estos pasos requieren cuentas, pagos o decisiones tuyas.
 
-## 0. Fusionar la rama de mejoras
+## Hecho
 
-La v0.3 vive en la rama `mejoras-feedback-octubre`. Revísala en local (`npm run dev`) y, si te
-convence:
+- Repositorio en la organización `radar-mdr`: https://github.com/radar-mdr/radar-mdr.github.io
+- Web publicada en GitHub Pages: https://radar-mdr.github.io (se republica en cada push y cada mañana).
+- Correo del proyecto y LinkedIn configurados en `src/config.ts`.
 
-```bash
-git checkout main
-```
+## 1. Ajustes pendientes en GitHub (5 min)
 
-```bash
-git merge mejoras-feedback-octubre
-```
-
-## 1. Dominio (15 min)
-
-1. Cómpralo en cualquier registrador. Si no tienes preferencia, Vercel también los vende y te
-   ahorras configurar DNS.
-2. Cambia **una sola línea**: `dominio` en [src/config.ts](../src/config.ts), por ejemplo
-   `'https://radar-mdr.es'`. De ahí salen el `og:url`, el sitemap, el `robots.txt`, el
-   calendario y los botones de suscripción a Google Calendar y Outlook, que aparecen solos al
-   cambiarla.
-
-## 2. GitHub y Vercel (20 min)
-
-1. Crea un repositorio vacío en GitHub (sin README ni licencia: ya existen).
-2. Conéctalo y sube todo, sustituyendo `TU-USUARIO`:
+1. En tu carpeta local, apunta git al repo nuevo (GitHub redirige el antiguo, pero mejor no depender de ello):
 
 ```bash
-git remote add origin https://github.com/TU-USUARIO/radar-mdr-ai-act.git
+git remote set-url origin https://github.com/radar-mdr/radar-mdr.github.io.git
 ```
 
-```bash
-git push -u origin main --tags
-```
+2. **Settings → Pages → Source: GitHub Actions.** Quita el check rojo de Jekyll.
+3. En la portada del repo, engranaje de «About»: web `https://radar-mdr.github.io`.
+4. Si conservas el proyecto de Vercel, bórralo: la web ya vive en Pages.
 
-3. En vercel.com: *Add New → Project*, importa el repo y despliega. Astro se detecta solo.
-4. En *Settings → Domains* añade el dominio del paso 1.
-5. Pon la URL del repo en `repositorio` de `src/config.ts`: aparecerá en el pie y en «Sobre mí».
+## 2. Dominio propio (opcional, unos 10 €/año)
 
-## 3. Vigilancia automática (10 min)
+1. Compra `radar-mdr.es` en un registrador que venda `.es`.
+2. En su DNS: cuatro registros **A** para `@` (`185.199.108.153`, `185.199.109.153`,
+   `185.199.110.153`, `185.199.111.153`) y un **CNAME** `www` → `radar-mdr.github.io`.
+3. GitHub → Settings → Pages → *Custom domain*: `radar-mdr.es`, y marca *Enforce HTTPS*.
+4. Cambia `dominio` en [src/config.ts](../src/config.ts): de ahí salen el `og:url`, el
+   sitemap, el `robots.txt`, el RSS y el calendario.
+
+## 3. Vigilancia automática (ya funciona a diario)
 
 1. GitHub → *Settings → Actions → General → Workflow permissions*: marca *Read and write*.
 2. Opcional, en *Settings → Secrets and variables → Actions*:
-   - `VERCEL_DEPLOY_HOOK`: créalo en Vercel (*Settings → Git → Deploy Hooks*). Redespliega cada mañana.
    - `ANTHROPIC_API_KEY`: añade un borrador de alerta en español a cada issue.
-3. Pestaña *Actions → Vigilancia regulatoria → Run workflow*. Los snapshots ya están sembrados,
-   así que desde la primera ejecución abrirá un issue si alguna fuente ha cambiado.
+3. Revisa de vez en cuando los issues que abre: cada uno trae el diff de la fuente que ha cambiado.
 
 ## 4. Vista previa en LinkedIn (5 min)
 
