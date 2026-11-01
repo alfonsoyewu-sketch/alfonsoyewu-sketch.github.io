@@ -1,76 +1,55 @@
-# Puesta en marcha: lo que necesita tus cuentas
+# Lo que falta: pasos que requieren tus cuentas
 
-Todo lo técnico está hecho. Estos pasos requieren cuentas, pagos o decisiones tuyas.
+Todo lo técnico está hecho. Esto es lo único pendiente, ordenado por prioridad.
 
-## Hecho
+## 1. Revisar la vigilancia (30 min, y luego cada lunes)
 
-- Repositorio en la organización `radar-mdr`: https://github.com/radar-mdr/radar-mdr.github.io
-- Web publicada en GitHub Pages: https://radar-mdr.github.io (se republica en cada push y cada mañana).
-- Correo del proyecto y LinkedIn configurados en `src/config.ts`.
+En GitHub → *Issues* hay una incidencia por cada día en que alguna fuente vigilada cambió.
+Para cada una:
 
-## 1. Ajustes pendientes en GitHub (5 min)
+1. Mira el diff. La mayoría son cambios de noticias o de menú, sin efecto en los datos.
+2. Si cambia un dato (una guía MDCG nueva, una fecha), actualiza el JSON correspondiente con su
+   entrada de `historial` (ver «Cómo corregir un plazo» en el README).
+3. Cierra la incidencia con una línea: «Sin cambios de datos» o «Actualizado en <commit>».
 
-1. En tu carpeta local, apunta git al repo nuevo (GitHub redirige el antiguo, pero mejor no depender de ello):
+Empieza por las del índice MDCG y de la AI Office: son las que más probablemente traen algo.
 
-```bash
-git remote set-url origin https://github.com/radar-mdr/radar-mdr.github.io.git
-```
+## 2. Leer «Sobre mí» (10 min)
 
-2. **Settings → Pages → Source: GitHub Actions.** Quita el check rojo de Jekyll.
-3. En la portada del repo, engranaje de «About»: web `https://radar-mdr.github.io`.
-4. Si conservas el proyecto de Vercel, bórralo: la web ya vive en Pages.
+Lee [sobre-mi.astro](../src/pages/sobre-mi.astro). Comprueba sobre todo que la declaración de
+independencia es exacta: no recibes dinero de fabricantes, consultoras, organismos notificados
+ni proveedores de eQMS. Si algo cambia, se edita ahí mismo.
 
-## 2. Dominio propio (opcional, unos 10 €/año)
+## 3. Vista previa en LinkedIn (5 min)
+
+Pega `https://radar-mdr.github.io` y `https://radar-mdr.github.io/sobre-mi/` en el
+[Post Inspector](https://www.linkedin.com/post-inspector/). Debe salir la imagen de 1200 × 627,
+el título y la descripción. Para medir de dónde vienen las visitas, añade UTM a los enlaces de
+cada post (ver [DISTRIBUCION.md](DISTRIBUCION.md)) y `?ref=linkedin` a los enlaces a `/pro/`.
+
+## 4. GoatCounter (2 min)
+
+En tu panel de GoatCounter → *Settings*, activa la opción de no contar tus propias visitas para
+que tus pruebas no inflen las cifras.
+
+## 5. Newsletter con Buttondown (20 min)
+
+1. Crea la cuenta con radar.mdr.aiact@gmail.com y elige el nombre de usuario.
+2. Pon ese usuario en `buttondownUsuario` de [src/config.ts](../src/config.ts).
+3. Al publicar, /newsletter muestra el formulario con su casilla de consentimiento y la página
+   de privacidad nombra a Buttondown. Cambia la fecha de «Última actualización» en
+   [privacidad.astro](../src/pages/privacidad.astro).
+
+## 6. Vercel
+
+Si el proyecto de Vercel sigue existiendo, bórralo (*Settings → General → Delete Project*):
+la web vive en GitHub Pages y no conviene tener dos copias.
+
+## 7. Dominio propio (opcional, unos 10 €/año)
 
 1. Compra `radar-mdr.es` en un registrador que venda `.es`.
 2. En su DNS: cuatro registros **A** para `@` (`185.199.108.153`, `185.199.109.153`,
    `185.199.110.153`, `185.199.111.153`) y un **CNAME** `www` → `radar-mdr.github.io`.
-3. GitHub → Settings → Pages → *Custom domain*: `radar-mdr.es`, y marca *Enforce HTTPS*.
-4. Cambia `dominio` en [src/config.ts](../src/config.ts): de ahí salen el `og:url`, el
-   sitemap, el `robots.txt`, el RSS y el calendario.
-
-## 3. Vigilancia automática (ya funciona a diario)
-
-1. GitHub → *Settings → Actions → General → Workflow permissions*: marca *Read and write*.
-2. Opcional, en *Settings → Secrets and variables → Actions*:
-   - `ANTHROPIC_API_KEY`: añade un borrador de alerta en español a cada issue.
-3. Revisa de vez en cuando los issues que abre: cada uno trae el diff de la fuente que ha cambiado.
-
-## 4. Vista previa en LinkedIn (5 min)
-
-Pega la URL en el [Post Inspector](https://www.linkedin.com/post-inspector/). Debe salir la
-imagen 1200 × 627, el título y la descripción. Más detalles y la convención de UTM en
-[DISTRIBUCION.md](DISTRIBUCION.md).
-
-## 5. Newsletter con Buttondown (20 min)
-
-1. Crea la cuenta y elige el nombre de usuario.
-2. Si tienes correo del dominio, úsalo como remitente.
-3. En `src/config.ts`: `buttondownUsuario` (tu usuario) y `email` (el correo del dominio).
-   El formulario con casilla de consentimiento sustituye solo al alta por correo, y la página
-   de privacidad pasa a nombrar a Buttondown y su enlace de baja.
-
-## 6. Analítica sin cookies con GoatCounter (5 min)
-
-Crea un sitio en goatcounter.com y pon su código en `goatcounterCodigo` (por ejemplo `radar-mdr`
-para radar-mdr.goatcounter.com). La página de privacidad se actualiza sola. GoatCounter no usa
-cookies, así que no necesitas banner.
-
-## 7. Formulario de Radar Pro con Tally (15 min)
-
-Crea un formulario con estas preguntas, que son las de [ENTREVISTAS.md](ENTREVISTAS.md):
-
-1. Tamaño de la empresa.
-2. Clases de producto y mercados.
-3. Horas al mes que dedicáis hoy a vigilar cambios regulatorios.
-4. Qué haríais si el Radar no existiera (a mano, consultora, otra herramienta) y cuánto os cuesta.
-5. Precio mensual que os parecería justo.
-
-Luego descomenta el `iframe` de [pro.astro](../src/pages/pro.astro) y sustituye `TALLY_ID`.
-
-## 8. Revisar «Sobre mí»
-
-Lee [sobre-mi.astro](../src/pages/sobre-mi.astro): está escrito a partir de tu CV. El correo
-público es el de la cuenta del proyecto (`email` en `src/config.ts`); cámbialo a
-`contacto@` de tu dominio cuando lo tengas. Si quieres contar algo más personal, como por qué te importa la accesibilidad, es tu decisión:
-no lo he incluido.
+3. GitHub → *Settings → Pages → Custom domain*: `radar-mdr.es`, y marca *Enforce HTTPS*.
+4. Cambia `dominio` en [src/config.ts](../src/config.ts) y, si creas `contacto@radar-mdr.es`,
+   también `email`. GitHub redirige solo desde radar-mdr.github.io.
